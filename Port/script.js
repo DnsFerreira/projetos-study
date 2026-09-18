@@ -258,3 +258,223 @@ window.addEventListener(
   "scroll",
   updateNavigation
 );
+
+
+
+const galleries =
+  document.querySelectorAll(
+    ".project-gallery"
+  );
+
+
+galleries.forEach(
+  gallery => {
+
+    const track =
+      gallery.querySelector(
+        ".gallery-track"
+      );
+
+    const slides =
+      Array.from(
+        gallery.querySelectorAll(
+          ".gallery-slide"
+        )
+      );
+
+    const dots =
+      Array.from(
+        gallery.querySelectorAll(
+          ".gallery-dot"
+        )
+      );
+
+    const counter =
+      gallery.querySelector(
+        ".gallery-counter"
+      );
+
+    const previousButton =
+      gallery.querySelector(
+        ".gallery-prev"
+      );
+
+    const nextButton =
+      gallery.querySelector(
+        ".gallery-next"
+      );
+
+
+    let currentSlide = 0;
+
+
+    function updateGallery(index) {
+
+      currentSlide =
+        Math.max(
+          0,
+          Math.min(
+            index,
+            slides.length - 1
+          )
+        );
+
+
+      slides[currentSlide]
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start"
+        });
+
+
+      dots.forEach(
+        (dot, dotIndex) => {
+
+          dot.classList.toggle(
+            "active",
+            dotIndex === currentSlide
+          );
+
+        }
+      );
+
+
+      counter.textContent =
+        `${String(currentSlide + 1)
+          .padStart(2, "0")} / ${String(slides.length)
+          .padStart(2, "0")}`;
+
+    }
+
+
+    previousButton.addEventListener(
+      "click",
+      () => {
+
+        updateGallery(
+          currentSlide - 1
+        );
+
+      }
+    );
+
+
+    nextButton.addEventListener(
+      "click",
+      () => {
+
+        updateGallery(
+          currentSlide + 1
+        );
+
+      }
+    );
+
+
+    dots.forEach(
+      (dot, index) => {
+
+        dot.addEventListener(
+          "click",
+          () => {
+
+            updateGallery(index);
+
+          }
+        );
+
+      }
+    );
+
+
+    let scrollTimeout;
+
+
+    track.addEventListener(
+      "scroll",
+      () => {
+
+        clearTimeout(
+          scrollTimeout
+        );
+
+
+        scrollTimeout =
+          setTimeout(
+            () => {
+
+              const trackLeft =
+                track.getBoundingClientRect().left;
+
+
+              let closestIndex = 0;
+
+              let closestDistance =
+                Infinity;
+
+
+              slides.forEach(
+                (slide, index) => {
+
+                  const slideLeft =
+                    slide
+                      .getBoundingClientRect()
+                      .left;
+
+
+                  const distance =
+                    Math.abs(
+                      slideLeft -
+                      trackLeft
+                    );
+
+
+                  if (
+                    distance <
+                    closestDistance
+                  ) {
+
+                    closestDistance =
+                      distance;
+
+                    closestIndex =
+                      index;
+
+                  }
+
+                }
+              );
+
+
+              currentSlide =
+                closestIndex;
+
+
+              dots.forEach(
+                (dot, index) => {
+
+                  dot.classList.toggle(
+                    "active",
+                    index ===
+                    currentSlide
+                  );
+
+                }
+              );
+
+
+              counter.textContent =
+                `${String(currentSlide + 1)
+                  .padStart(2, "0")} / ${String(slides.length)
+                  .padStart(2, "0")}`;
+
+            },
+            80
+          );
+
+      }
+    );
+
+  }
+);
