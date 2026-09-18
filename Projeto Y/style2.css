@@ -1,0 +1,98 @@
+* {
+    padding: 0;
+    margin: 0
+}
+@import url('https://fonts.googleapis.com/css2?family=Caacupe+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    text-decoration: none;
+}
+
+body {
+    background-color: black;
+}
+
+#bannerCar {
+    width: 100%;
+    height: 100vh;
+}
+
+
+
+.logo {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 15rem;
+    left: 10rem;
+    width: 500px;
+}
+
+p {
+    line-height: 1.35;
+    font-weight: 200;
+    font-size: 18px;
+    color: antiquewhite;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+.section_content {
+    display: grid;
+    grid-template-columns: repeat(4, 350px);
+    align-items: center;
+    justify-content: center;
+    gap: 80px 130px;
+    
+}
+.card_content {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+
+    background-color: #6e1a26;
+    width: 350px;
+    height: 400px;
+    border-radius: 25px;
+}
+
+.card_content img {
+    width: 500px;
+    height: 300px;
+
+    position: relative;
+    bottom: 25px;
+
+}
+
+.text_content {
+
+    font-family: "Montserrat", sans-serif;
+    color: aliceblue;
+    width: 250px;
+}
+
+.text_content h1 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: right;
+}
+
+.text_content p {
+    text-align: right;
+}
+
+.button_content {
+    background-color: #af2338;
+    width: 350px;
+    border-radius: 15px;
+    position: relative;
+    top: -45px;
+}
+
+
+.button_content p {
+    text-align: center;
+    padding: 10px;
+}
